@@ -34,14 +34,25 @@ function makeSound(key) {
     }
 }
 
+function buttonAnimation(currentKey) {
+    const activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100)
+}
+
 document.querySelectorAll("button").forEach(button => {
     button.addEventListener("click", function () {
         const buttonInnerHTML = this.innerHTML;
         makeSound(buttonInnerHTML);
+        buttonAnimation(buttonInnerHTML);
     });
 });
 
 document.addEventListener("keypress", function (event) {
     const pressedKey = event.key.toLowerCase();
     makeSound(pressedKey);
+    buttonAnimation(pressedKey);
 });
